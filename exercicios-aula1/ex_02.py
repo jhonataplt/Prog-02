@@ -3,7 +3,7 @@
 def metade():
     lista = []
     for i in range (10):
-        num = int(input())
+        num = float(input())
         lista.append(num / 2)
 
     print(lista)
