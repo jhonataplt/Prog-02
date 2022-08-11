@@ -10,8 +10,6 @@ def menor(m,n):
 
 def mdc(m,n):
     menorNum = menor(m,n)
-    while menorNum >= 1:
-        if ex_04.divisor(menorNum,m) and ex_04.divisor(menorNum,n):
-            print(menorNum)
-            return
+    while not(ex_04.divisor(menorNum,m)) or not(ex_04.divisor(menorNum,n)):
         menorNum -= 1
+    print(menorNum)
