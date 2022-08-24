@@ -20,15 +20,6 @@
 # Sul, Leste, Oeste, respectivamente). A lista de entrada contem uma sequencia de S caracteres dentre 'D', 'E' e 'F', representando as
 # instrucoes do robo.
 
-def imprimirArena(arena):
-    print("||", "===" * len(arena), "||")
-    for linha in arena:
-        print("||", end="  ")
-        for elemento in linha:
-            print(elemento, end="  ")
-        print("||")
-    print("||", "===" * len(arena), "||")
-
 def ocorrencias(lista, elementoDesejado):
     ocorrencia = 0
     for elemento in lista:
@@ -40,9 +31,6 @@ def roboColecionador(arena, comandos):
     orientacao = ["N","L","S","O"]
     figurinhasTotais = 0
     figurinhasRestantes = 0
-
-    print("Arena a ser usada: ")
-    imprimirArena(arena)
 
     #% Posicao Inicial da Peca
     for linha in arena: 
@@ -58,38 +46,35 @@ def roboColecionador(arena, comandos):
 
     #% Definicao da Orientacao
     for comando in comandos:
-        print(f"\nComando inserido = {comando}")
         if comando == 'D':
             indice += 1
-            arena[posicaoY][posicaoX] = orientacao[indice]
+            arena[posicaoY][posicaoX] = orientacao[indice % 4]
         elif comando == 'E':
             indice -= 1
-            arena[posicaoY][posicaoX] = orientacao[indice]
+            arena[posicaoY][posicaoX] = orientacao[indice % 4]
 
         #% Validacao/Movimentacao da Peca
         if comando == "F":
             if indice % 4 == 0:
                 if posicaoY - 1 in range(len(arena)) and posicaoX in range(len(arena)):
                     if arena[posicaoY - 1][posicaoX] != "#":
-                        arena[posicaoY][posicaoX], arena[posicaoY - 1][posicaoX] = ".", orientacao[indice]
+                        arena[posicaoY][posicaoX], arena[posicaoY - 1][posicaoX] = ".", orientacao[indice % 4]
                         posicaoY -= 1
             elif indice % 4 == 1:
                 if posicaoY in range(len(arena)) and posicaoX + 1 in range(len(arena)):
                     if arena[posicaoY][posicaoX + 1] != "#":
-                        arena[posicaoY][posicaoX], arena[posicaoY][posicaoX + 1] = ".", orientacao[indice]
+                        arena[posicaoY][posicaoX], arena[posicaoY][posicaoX + 1] = ".", orientacao[indice % 4]
                         posicaoX += 1
             elif indice % 4 == 2:
                 if posicaoY + 1 in range(len(arena)) and posicaoX in range(len(arena)):
                     if arena[posicaoY + 1][posicaoX] != "#":
-                        arena[posicaoY][posicaoX], arena[posicaoY + 1][posicaoX] = ".", orientacao[indice]
+                        arena[posicaoY][posicaoX], arena[posicaoY + 1][posicaoX] = ".", orientacao[indice % 4]
                         posicaoY += 1
             elif indice % 4 == 3:
                 if posicaoY in range(len(arena)) and posicaoX - 1 in range(len(arena)):
                     if arena[posicaoY][posicaoX - 1] != "#":
-                        arena[posicaoY][posicaoX], arena[posicaoY][posicaoX - 1] = ".", orientacao[indice]
+                        arena[posicaoY][posicaoX], arena[posicaoY][posicaoX - 1] = ".", orientacao[indice % 4]
                         posicaoX -= 1
-
-        imprimirArena(arena)
     
     #% Figurinhas Restantes na Arena
     for linha in arena:
@@ -104,12 +89,10 @@ def roboColecionador(arena, comandos):
 # arena1 = [["*","*","*"],["*","N","*"],["*","*","*"]]
 # comandos1 = ["D","E"]
 # roboColecionador(arena1, comandos1)
-# print("\n","=" * 50,"\n")
 
 # arena2 = [[".",".",".","#"],["*","#","O","."],["*",".","*","."],["*",".","#","."]]
 # comandos2 = ["F","F","E","F","F"]
 # roboColecionador(arena2, comandos2)
-# print("\n","=" * 50,"\n")
 
 # arena3 = [[".",".",".",".","*",".",".",".",".","."],[".",".",".",".",".",".",".","*",".","."],[".",".",".",".",".","*",".",".",".","."],[".",".","*",".","#",".",".",".",".","."],[".",".",".","#","N",".","*",".",".","*"],[".",".",".","*",".",".",".",".",".","."],[".",".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".",".","."],[".",".",".",".",".",".",".",".",".","."]]
 # comandos3 = ["F","D","F","F","F","F","F","F","E","E","F","F","F","F","F","F","E","F","D","F"]
