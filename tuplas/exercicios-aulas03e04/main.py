@@ -33,7 +33,7 @@ def main():
             function.visualizarJogadores(bancoJogadores)
             print()
             bancoApostas = function.cadastrarNovaAposta(bancoJogadores, bancoApostas)
-            print(bancoApostas)
+            print()
             opcao = function.menu()
 
         #$ Processo de visualizar todos as apostas feitas ate o momento

@@ -104,23 +104,18 @@ def cadastrarNovoJogador(bancoJogadores):
     #$ Definicao das variaveis
     jogador = (nome, cpf)
 
-    #$ Cadastro do primeiro jogador
-    if bancoJogadores == []:
-        bancoJogadores.append(jogador)
-
     #$ Validacao de cpf repetido
-    else:
-        if cpfRepetido(cpf, bancoJogadores):
-            print('ERRO. Jogador ja cadastrado no sistema.')
-        
-        #$ Validacao da quantidade de digitos do cpf
-        elif len(cpf) != 11:
-            print("ERRO. O cpf deve ter 11 digitos.")
+    if cpfRepetido(cpf, bancoJogadores):
+        print('ERRO. Jogador ja cadastrado no sistema.')
+    
+    #$ Validacao da quantidade de digitos do cpf
+    elif len(cpf) != 11:
+        print("ERRO. O cpf deve ter 11 digitos.")
 
-        #$ Cadastro de demais jogadores
-        else:
-            bancoJogadores.append(jogador)
-            return bancoJogadores
+    #$ Cadastro de jogadores
+    else:
+        bancoJogadores.append(jogador)
+        return bancoJogadores
 
     #$ Saida principal da funcao
     return bancoJogadores
@@ -134,17 +129,17 @@ def cadastrarNovoJogador(bancoJogadores):
 def visualizarJogadores(bancoJogadores):
 
 #$ Borda superior
-    print("=" * 54)
-    print("||", "NOME", " " * 26, "|", "CPF", " " * 10, "||")
-    print("||", "-" * 31,"|", "-" * 14, "||")
+    print("=" * 68)
+    print("||", "NOME", " " * 40, "|", "CPF", " " * 10, "||")
+    print("||", "-" * 45,"|", "-" * 14, "||")
 
     #$ Saida dos nomes e cpf dos jogadores
     for (nome, cpf) in bancoJogadores:
-        print("||", nome, " " * (30 - len(nome)), "|", end="")
+        print("||", nome, " " * (44 - len(nome)), "|", end="")
         print(" ", cpf[0:3],".", cpf[3:6],".", cpf[6:9],"-", cpf[9:11], " ||",sep="")
 
     #$ Borda inferior
-    print("=" * 54)
+    print("=" * 68)
 
 
 #$ ===============================
@@ -200,8 +195,10 @@ def leituraNumerosAposta(quantNumerosAposta):
         num = int(input("Insira o numero que deseja apostar: "))
 
         #$ Validacao dos numeros inseridos
-        if num in numerosApostados and not num in range(1, 61):
+        if num in numerosApostados:
             print("ERRO. Numero ja inserido, insira outro numero.")
+        elif not num in range(1, 61):
+            print("ERRO. Insira um numero entre 1 e 60")
         else:
             numerosApostados.append(num)
             quantNumerosAposta -= 1
@@ -332,13 +329,13 @@ def imprimirGanhadores(ganhadores):
         print("BILHETE GANHADOR:", bilhete[1])
 
         #$ Borda superior
-        print("=" * 80)
-        print("||", "NOME", " " * 26, "|", "CPF", " " * 10, "|", "PREMIO"," " * 16,"||")
-        print("||", "-" * 31,"|", "-" * 14, "|",  "-" * 23, "||")
+        print("=" * 95)
+        print("||", "NOME", " " * 40, "|", "CPF", " " * 10, "|", "PREMIO"," " * 16,"||")
+        print("||", "-" * 45,"|", "-" * 14, "|",  "-" * 23, "||")
 
         #$ Saida dos nomes do jogadores
         for jogador in bilhete[0]:
-            print("||", jogador[0], " " * (30 - len(jogador[0])), "|", end="")
+            print("||", jogador[0], " " * (44 - len(jogador[0])), "|", end="")
 
             #$ Saida do CPF dos jogadores
             print(" ", jogador[1][0:3],".", jogador[1][3:6],".", jogador[1][6:9],"-", jogador[1][9:11], " |",sep="",end=" ")
@@ -350,4 +347,4 @@ def imprimirGanhadores(ganhadores):
             print(' ' * (19 - len(str(premioJogador))), '||')
 
         #$ Borda inferior
-        print("=" * 80, "\n")
+        print("=" * 95, "\n")
