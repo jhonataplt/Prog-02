@@ -16,20 +16,28 @@ def clear():
 
 def main():
     
+    #$ Definicao de variaveis
     contatos = {}
     opcao = 0
 
+    #$ Impressao das opcoes
     while opcao != '3':
         print('''
 1 - Cadastrar telefone
 2 - Visualizar agenda
 3 - Sair do programa
         ''')
+
+        #$ Entrada do usuario para escolha de opcao
         opcao = input('Insira a opcao que voce deseja: ')
         clear()
+
+        #$ Cadastramento de novos telefones
         if opcao == '1':
             nome = input('Nome: ')
             contatos[nome] = input('Telefone: ')
+
+        #$ Visualizando os telefones cadastrados
         if opcao == '2':
             for pessoa in contatos:
                 print(f'Nome: {pessoa}\tTelefone: {contatos[pessoa]}')
